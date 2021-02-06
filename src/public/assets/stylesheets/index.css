@@ -1,34 +1,55 @@
 /* -------------------  MOBILE  --------------------- */
 
 body {
-  display: flex;
-  flex-direction: column;
   font-family: Arial;
   min-height: 100vh;
 }
 
-header {
-  /* header styles */
+/* ---- commons  ---- */
+
+.text__alignment {
+  margin: 20px;
+  text-align: center;
 }
 
-main {
-  flex: 1;
-  padding: 20px;
+/* ---- rover section  ---- */
+
+.rovers__layout {
+  align-items: center;
+  flex-flow: column;
+  display: flex;
+  width: 100vw;
 }
 
-footer {
-  /* footer styles */
+.rover {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+}
+
+.rover__image {
+  width: 100%;
 }
 
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
-  /* use mobile */
+  .rovers__layout {
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+
+  .rover {
+    width: 60%;
+  }
 }
 
 /* -------------------  DESKTOP  -------------------- */
 
 @media (min-width: 1224px) {
-  /* use mobile */
+  .rover {
+    width: 40%;
+  }
 }
 
 /* -------------------  LARGE SCREENS  -------------- */

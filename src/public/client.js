@@ -1,7 +1,6 @@
 let store = Immutable.Map({
     choosenRover: 'Curiosity',
     roverInfo: Immutable.Map({}),
-    apod: '',
     rovers: Immutable.List(['Curiosity', 'Opportunity', 'Spirit']),
 });
 
@@ -20,24 +19,16 @@ const render = async (root, state) => {
 // create content
 const App = (state) => {
     const roverRenderer = Rovers(state);
+    const renderNavBar = navBar(state);
     return `
-        <header>
+        <header class="text__alignment">
             <h1>Mars Rovers Photos</h1>
+            ${renderNavBar}
         </header>
         <main>
-        ${roverRenderer}
-            <section>
-                <h3>Put things on the page!</h3>
-                <p>Here is an example section.</p>
-                <p>
-                    One of the most popular websites at NASA is the Astronomy Picture of the Day. In fact, this website is one of
-                    the most popular websites across all federal agencies. It has the popular appeal of a Justin Bieber video.
-                    This endpoint structures the APOD imagery and associated metadata so that it can be repurposed for other
-                    applications. In addition, if the concept_tags parameter is set to True, then keywords derived from the image
-                    explanation are returned. These keywords could be used as auto-generated hashtags for twitter or instagram feeds;
-                    but generally help with discoverability of relevant imagery.
-                </p>
-
+            <h2 class="text__alignment">This are the latest photos</h2>
+            <section class="rovers__layout">
+                ${roverRenderer}
             </section>
         </main>
         <footer></footer>
@@ -53,16 +44,10 @@ window.addEventListener('load', () => {
 // ------------------------------------------------------  COMPONENTS
 
 // Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
-const Greeting = (name) => {
-    if (name) {
-        return `
-            <h1>Welcome, ${name}!</h1>
-        `
-    }
-
-    return `
-        <h1>Hello!</h1>
-    `
+const navBar = (store) => {
+    return store.get('rovers').map(i => {
+        return `<button onclick="getRoverImages('${i}')"> ${i} </button>`
+    }).join('')
 }
 
 const Rovers = (store) => {
@@ -70,10 +55,12 @@ const Rovers = (store) => {
 
     return test.map(i => {
         return `
-            <img src={i.img_src}/>
-            <p>${i.earth_date}</p>
+            <article class="rover">
+                <img class="rover__image" src=${i.img_src} />
+                <p>${i.earth_date}</p>
+            </article>
         `
-    })
+    }).join('')
 }
 
 // ------------------------------------------------------  API CALLS
