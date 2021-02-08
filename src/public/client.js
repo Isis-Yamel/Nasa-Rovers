@@ -1,72 +1,87 @@
 let store = Immutable.Map({
-    choosenRover: 'Curiosity',
-    roverInfo: Immutable.Map({}),
-    rovers: Immutable.List(['Curiosity', 'Opportunity', 'Spirit']),
+  choosenRover: 'Curiosity',
+  roverInfo: Immutable.Map({}),
+  rovers: Immutable.List(['Curiosity', 'Opportunity', 'Spirit']),
 });
 
 // add our markup to the page
-const root = document.getElementById('root')
-
-const updateStore = (state, newState) => {
-    const store = state.merge(newState)
-    render(root, store)
-}
+const root = document.getElementById('root');
 
 const render = async (root, state) => {
-    root.innerHTML = App(state)
-}
+  root.innerHTML = App(state);
+};
 
-// create content
-const App = (state) => {
-    const roverRenderer = Rovers(state);
-    const renderNavBar = navBar(state);
-    return `
-        <header class="text__alignment">
-            <h1>Mars Rovers Photos</h1>
-            ${renderNavBar}
-        </header>
-        <main>
-            <h2 class="text__alignment">This are the latest photos</h2>
-            <section class="rovers__layout">
-                ${roverRenderer}
-            </section>
-        </main>
-        <footer></footer>
-    `
-}
-
-// listening for load event because page should load before any JS is called
-window.addEventListener('load', () => {
-    getRoverImages(store.get('choosenRover'));
-    render(root, store);
-})
+const updateStore = (state, newState) => {
+  const store = state.merge(newState);
+  render(root, store);
+};
 
 // ------------------------------------------------------  COMPONENTS
 
-// Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
-const navBar = (store) => {
-    return store.get('rovers').map(i => {
-        return `<button onclick="getRoverImages('${i}')"> ${i} </button>`
-    }).join('')
-}
+const NavBar = (store) => store.get('rovers').map(i => (
+  `<button class="dashboard__button" onclick="getRoverImages('${i}')"> ${i} </button>`
+)).join('')
 
-const Rovers = (store) => {
-    const test = store.get('roverInfo').get('data').get('photos').toJS();
+const Dashboard = (gallery, navBar) => `
+  <header class="text__alignment">
+    <h1>Mars Rovers Photos</h1>
+    <section>
+      ${navBar}
+    </section>
+  </header>
+  <main>
+    <section class="rovers__layout">
+      ${gallery}
+    </section>
+  </main>
+  <footer></footer>
+`;
 
-    return test.map(i => {
-        return `
-            <article class="rover">
-                <img class="rover__image" src=${i.img_src} />
-                <p>${i.earth_date}</p>
-            </article>
-        `
+const RoverGallery = (store) => {
+  const roverGallery = store.get('roverInfo').get('data').get('latest_photos').toJS();
+
+  if(roverGallery !== undefined) {
+    return roverGallery.map(i => {
+      return `
+        <article class="rover">
+          <figure>
+            <img class="rover__image" src=${i.img_src} />
+            <figcaption class="rover__caption">Photo date: ${i.earth_date}</figcaption>
+          </figure>
+          <div class="rover__data__container">
+            <p><span class="rover__data"> Rover name: </span> ${i.rover.name}</p>
+            <p><span class="rover__data"> Rover status: </span> ${i.rover.status}</p>
+            <p><span class="rover__data"> Landing date: </span>Landing date: ${i.rover.landing_date}</p>
+            <p><span class="rover__data"> Launch date: </span> ${i.rover.launch_date}</p>
+          </div>
+        </article>
+      `
     }).join('')
+  }
+
+  return `Hold on, data is coming!!`
+};
+
+// ------------------------------------------------------  APP CONTAINER
+
+const App = (state) => {
+  const gallery = RoverGallery(state);
+  const navBar = NavBar(state);
+
+  return Dashboard(gallery, navBar)
 }
 
 // ------------------------------------------------------  API CALLS
 
 const getRoverImages = (choosenRover) => {
-    fetch(`http://localhost:3000/rovers/${choosenRover}`)
-        .then(res => res.json())
-        .then(roverInfo => updateStore(store, { roverInfo }))
-}
+  fetch(`http://localhost:3000/rovers/${choosenRover}`)
+  .then(res => res.json())
+  .then(roverInfo => updateStore(store, { roverInfo }))
+};
+
+// ------------------------------------------------------  LOAD LISTENER
+
+window.addEventListener('load', () => {
+  getRoverImages(store.get('choosenRover'));
+  render(root, store);
+});

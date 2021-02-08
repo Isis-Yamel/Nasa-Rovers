@@ -1,7 +1,9 @@
 /* -------------------  MOBILE  --------------------- */
 
 body {
-  font-family: Arial;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
   min-height: 100vh;
 }
 
@@ -10,6 +12,22 @@ body {
 .text__alignment {
   margin: 20px;
   text-align: center;
+}
+
+/* ---- dashboard section  ---- */
+
+.dashboard__button {
+  background-color: #CDDC39;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 10px;
+  padding: 8px;
+}
+
+.dashboard__button:hover {
+  background-color: #ffffff;
 }
 
 /* ---- rover section  ---- */
@@ -22,14 +40,27 @@ body {
 }
 
 .rover {
-  display: flex;
-  flex-direction: column;
+  margin: 10px;
   padding: 10px;
-  width: 100%;
 }
 
 .rover__image {
   width: 100%;
+}
+
+.rover__caption {
+  color: #CDDC39;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.rover__data {
+  font-weight: bold;
+}
+
+.rover__data__container {
+  margin-right: 4%;
+  text-align: right;
 }
 
 /* -------------------  TABLET  --------------------- */
@@ -40,6 +71,8 @@ body {
   }
 
   .rover {
+    border-radius: 20px;
+    border: 2px solid;
     width: 60%;
   }
 }
