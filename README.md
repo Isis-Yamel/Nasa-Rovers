@@ -1,10 +1,24 @@
-# Functional Programming with Javascript 
+# Functional Programming with Javascript
 
 ## Student Instructions
 
+To run this app:
+
+1. First clone the repository:
+
+- https : ```git clone https://github.com/Isis-Yamel/Nasa-Rovers.git``` ||
+- ssh : ```git clone git@github.com:Isis-Yamel/Nasa-Rovers.git```
+
+2. Then install dependencies
+
+- ```yarn install```
+
+3. Finally run the application [The application will run on port:3000]
+
+- ```yarn start```
 ### Big Picture
 
-You are going to create a Mars rover dashboard that consumes the NASA API. Your dashboard will allow the user to select which rover's information they want to view. Once they have selected a rover, they will be able to see the most recent images taken by that rover, as well as important information about the rover and its mission. Your app will make use of all the functional concepts and practices you have learned in this course, and the goal is that you would become very comfortable using pure functions and iterating over, reshaping, and accessing information from complex API responses. 
+You are going to create a Mars rover dashboard that consumes the NASA API. Your dashboard will allow the user to select which rover's information they want to view. Once they have selected a rover, they will be able to see the most recent images taken by that rover, as well as important information about the rover and its mission. Your app will make use of all the functional concepts and practices you have learned in this course, and the goal is that you would become very comfortable using pure functions and iterating over, reshaping, and accessing information from complex API responses.
 
 ### Getting Started
 
@@ -18,7 +32,7 @@ We have supplied some of the foundational code for you. So follow these steps to
 
  - [ ] For this project we are using yarn as our package manager, so to install your depencies run:
 
-```yarn install``` 
+```yarn install```
 
 **If you don’t have yarn installed globally, follow their installation documentation here according to your operating system: https://yarnpkg.com/lang/en/docs/install
 
@@ -34,29 +48,29 @@ We have supplied some of the foundational code for you. So follow these steps to
 
 To complete this project, your UI must show the following:
 
-- [ ] A gallery of the most recent images sent from each mars rover
-- [ ] The launch date, landing date, name and status along with any other information about the rover
-- [ ] A selection bar for the user to choose which rover's information they want to see
+- [:white_check_mark:] A gallery of the most recent images sent from each mars rover
+- [:white_check_mark:] The launch date, landing date, name and status along with any other information about the rover
+- [:white_check_mark:] A selection bar for the user to choose which rover's information they want to see
 
 To complete this project, your UI must do the following:
 
-- [ ] Be responsive. Needs to look good(aka not broken) on phones(max width 768px) and desktop(min-width 991px, max-width 1824px). Tablet view is optional.
-- [ ] Provide a way to dynamically switch the UI to view one of the three rovers 
+- [:white_check_mark:] Be responsive. Needs to look good(aka not broken) on phones(max width 768px) and desktop(min-width 991px, max-width 1824px). Tablet view is optional.
+- [:white_check_mark:] Provide a way to dynamically switch the UI to view one of the three rovers
 **This can be done using tabs, buttons, or any other UI control
 
 To complete this project, your frontend code must:
 
-- [ ] Use only pure functions
-- [ ] Use at least one Higher Order Function
-- [ ] Use the array method `map`
-- [ ] Use the ImmutableJS library
+- [:white_check_mark:] Use only pure functions
+- [:white_check_mark:] Use at least one Higher Order Function
+- [:white_check_mark:] Use the array method `map`
+- [:white_check_mark:] Use the ImmutableJS library
 
 To complete this project, your backend code must:
 
-- [ ] Be built with Node/Express
-- [ ] Make successful calls to the NASA API
-- [ ] Use pure functions to do any logic necessary
-- [ ] Hide any sensetive information from public view (In other words, use your dotenv file)
+- [:white_check_mark:] Be built with Node/Express
+- [:white_check_mark:] Make successful calls to the NASA API
+- [:white_check_mark:] Use pure functions to do any logic necessary
+- [:white_check_mark:] Hide any sensetive information from public view (In other words, use your dotenv file)
 
 ### Above and Beyond
 
@@ -66,7 +80,7 @@ Some ideas might be to incorporate the Astronomy Photo of the Day into your desi
 
 ### Design
 
-Create an image gallery slider, put a full page background image, code some falling asteroids with css animations ... the visual design of this UI is up to you! There is a lot of awesome dashboard design inspiration out there. You have already been given a good start with a mobile-first stylesheet already set up for you. 
+Create an image gallery slider, put a full page background image, code some falling asteroids with css animations ... the visual design of this UI is up to you! There is a lot of awesome dashboard design inspiration out there. You have already been given a good start with a mobile-first stylesheet already set up for you.
 
 
 
