@@ -18,6 +18,7 @@ const updateStore = (state, newState) => {
 
 // ------------------------------------------------------  COMPONENTS
 
+//guide source template literals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
 const NavBar = (store) => store.get('rovers').map(i => (
   `<button class="dashboard__button" onclick="getRoverImages('${i}')"> ${i} </button>`
 )).join('')
