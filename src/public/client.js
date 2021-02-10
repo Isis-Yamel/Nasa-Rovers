@@ -38,33 +38,35 @@ const Dashboard = (gallery, navBar) => `
   <footer></footer>
 `;
 
+const RoverTile = (i) => {
+  return `
+    <article class="rover">
+      <figure>
+        <img class="rover__image" src=${i.img_src} />
+        <figcaption class="rover__caption">Photo date: ${i.earth_date}</figcaption>
+      </figure>
+      <div class="rover__data__container">
+        <p><span class="rover__data"> Rover name: </span> ${i.rover.name}</p>
+        <p><span class="rover__data"> Rover status: </span> ${i.rover.status}</p>
+        <p><span class="rover__data"> Landing date: </span>Landing date: ${i.rover.landing_date}</p>
+        <p><span class="rover__data"> Launch date: </span> ${i.rover.launch_date}</p>
+      </div>
+    </article>
+  `
+}
+//HOF Function to return each tile
 const RoverGallery = (store) => {
   const roverGallery = store.get('roverInfo').get('data').get('latest_photos').toJS();
 
   if(roverGallery !== undefined) {
-    return roverGallery.map(i => {
-      return `
-        <article class="rover">
-          <figure>
-            <img class="rover__image" src=${i.img_src} />
-            <figcaption class="rover__caption">Photo date: ${i.earth_date}</figcaption>
-          </figure>
-          <div class="rover__data__container">
-            <p><span class="rover__data"> Rover name: </span> ${i.rover.name}</p>
-            <p><span class="rover__data"> Rover status: </span> ${i.rover.status}</p>
-            <p><span class="rover__data"> Landing date: </span>Landing date: ${i.rover.landing_date}</p>
-            <p><span class="rover__data"> Launch date: </span> ${i.rover.launch_date}</p>
-          </div>
-        </article>
-      `
-    }).join('')
+    return roverGallery.map(i => RoverTile(i)).join('')
   }
 
   return `Hold on, data is coming!!`
 };
 
 // ------------------------------------------------------  APP CONTAINER
-
+//HOF to return the dashboard and its components
 const App = (state) => {
   const gallery = RoverGallery(state);
   const navBar = NavBar(state);
